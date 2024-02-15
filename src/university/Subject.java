@@ -31,4 +31,7 @@ public class Subject {
 		return code;
 	}
 
+	public String toString() {
+		return String.format("%s - %s", this.code, this.name);
+	}
 }

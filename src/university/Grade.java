@@ -26,6 +26,6 @@ public class Grade {
 	public String toString() {
 		return String.format("Student: %s, Subject: %s, Score: %d\n", 
 				student.getStudentId() + "-" + student.getName(),
-				subject.getCode() + "-" + subject.getName(), score);
+				subject, score);
 	}
 }
