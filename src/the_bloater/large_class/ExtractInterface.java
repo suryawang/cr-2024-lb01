@@ -1,10 +1,15 @@
 package the_bloater.large_class;
 
 public class ExtractInterface {
+	interface Billable {
+		int getRate();
+		boolean hasSpecialSkill();
+	}
+
 	class TimeSheet {
-		public double charge(Employee employee, int days) {
-			double base = employee.getRate() * days;
-			if (employee.hasSpecialSkill()) {
+		public double charge(Billable billable, int days) {
+			double base = billable.getRate() * days;
+			if (billable.hasSpecialSkill()) {
 				return base * 1.05;
 			} else {
 				return base;
@@ -12,7 +17,7 @@ public class ExtractInterface {
 		}
 	}
 
-	class Employee {
+	class Employee implements Billable {
 		private int rate;
 		private boolean hasSpecialSkill;
 		private String name;
