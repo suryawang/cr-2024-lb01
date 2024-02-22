@@ -23,7 +23,7 @@ public class ParameterizeObject {
 			Enumeration e = transactions.elements();
 			while (e.hasMoreElements()) {
 				Transaction each = (Transaction) e.nextElement();
-				if (each.getDate().compareTo(range.start) >= 0 && each.getDate().compareTo(range.end) <= 0) {
+				if (range.contain(each.getDate())) {
 					result += each.getValue();
 				}
 			}
@@ -38,6 +38,10 @@ public class ParameterizeObject {
 		public DateRange(Date start, Date end) {
 			this.start = start;
 			this.end = end;
+		}
+
+		public boolean contain(Date date) {
+			return date.compareTo(start) >= 0 && date.compareTo(end) <= 0;
 		}
 	}
 
