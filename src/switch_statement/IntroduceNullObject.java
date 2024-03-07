@@ -73,7 +73,7 @@ public class IntroduceNullObject {
 		} else {
 			weeksDelinquent = customer.getHistory().getWeeksDelinquentInLastYear();
 		}
-		System.out.println("done");
+		System.out.println(weeksDelinquent);
 	}
 
 	public static void main(String[] a) {
