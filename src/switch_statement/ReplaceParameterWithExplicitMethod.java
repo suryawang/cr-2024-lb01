@@ -24,17 +24,12 @@ public class ReplaceParameterWithExplicitMethod {
 		// change apply discount in this Fixed discount and Percent discount
 		// with each own method
 
-		public void applyDiscount(int type, double discount) {
-			switch (type) {
-			case FIXED_DISCOUNT:
-				price -= discount;
-				break;
-			case PERCENT_DISCOUNT:
-				price *= discount;
-				break;
-			default:
-				throw new IllegalArgumentException("Invalid discount type");
-			}
+		public void applyFixedDiscount(double discount) {
+			price -= discount;
+		}
+
+		public void applyPercentDiscount(double discount) {
+			price *= discount;
 		}
 	}
 
@@ -42,30 +37,30 @@ public class ReplaceParameterWithExplicitMethod {
 		Order order = new Order(20, 4);
 		boolean weekend = false;
 		if (weekend) {
-			order.applyDiscount(Order.FIXED_DISCOUNT, 10);
+			order.applyFixedDiscount(10);
 		}
 		if (order.getSize() > 5) {
-			order.applyDiscount(Order.PERCENT_DISCOUNT, 0.2);
+			order.applyPercentDiscount(0.2);
 		}
 		System.out.println("price = " + order.getPrice());
 
 		Order order1 = new Order(20, 7);
 		boolean weekend1 = true;
 		if (weekend1) {
-			order1.applyDiscount(Order.FIXED_DISCOUNT, 10);
+			order1.applyFixedDiscount(10);
 		}
 		if (order1.getSize() > 5) {
-			order1.applyDiscount(Order.PERCENT_DISCOUNT, 0.2);
+			order1.applyPercentDiscount(0.2);
 		}
 		System.out.println("price = " + order1.getPrice());
 
 		Order order2 = new Order(20, 7);
 		boolean weekend2 = false;
 		if (weekend2) {
-			order2.applyDiscount(Order.FIXED_DISCOUNT, 10);
+			order2.applyFixedDiscount(10);
 		}
 		if (order2.getSize() > 5) {
-			order2.applyDiscount(Order.PERCENT_DISCOUNT, 0.2);
+			order2.applyPercentDiscount(0.2);
 		}
 		System.out.println("price = " + order2.getPrice());
 
