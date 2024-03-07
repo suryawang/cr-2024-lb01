@@ -18,19 +18,15 @@ public class ParameterizedMethod {
 		public void updateBullet() {
 			if (this.type == NORMAL) {
 				this.type = SUPER;
-				superSpeed();
+				setSpeed(1.2);
 			} else if (this.type == SUPER) {
 				this.type = HYPER;
-				hyperSpeed();
+				setSpeed(1.5);
 			}
 		}
 
-		protected void superSpeed() {
-			speed = 1.2;
-		}
-
-		protected void hyperSpeed() {
-			speed = 1.5;
+		protected void setSpeed(double speed) {
+			this.speed = speed;
 		}
 
 		public double getSpeed() {
