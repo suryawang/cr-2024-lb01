@@ -1,6 +1,28 @@
 package switch_statement;
 
 public class Calculator {
+	interface RiskFactor {
+		double calculateInsurance(double insuranceValue);
+	}
+
+	class LowRiskFactor implements RiskFactor {
+		public double calculateInsurance(double insuranceValue) {
+			return insuranceValue * 0.02;
+		}
+	}
+
+	class ModerateRiskFactor implements RiskFactor {
+		public double calculateInsurance(double insuranceValue) {
+			return insuranceValue * 0.04;
+		}
+	}
+
+	class HighRiskFactor implements RiskFactor {
+		public double calculateInsurance(double insuranceValue) {
+			return insuranceValue * 0.06;
+		}
+	}
+
 	class InsuranceQuote {
 		private Motorist motorist;
 
@@ -10,28 +32,16 @@ public class Calculator {
 
 		public RiskFactor calculateMotoristRisk() {
 			if (motorist.getPointsOnLicense() > 3 || motorist.getAge() < 25)
-				return RiskFactor.HIGH_RISK;
+				return new HighRiskFactor();
 			if (motorist.getPointsOnLicense() > 0)
-				return RiskFactor.MODERATE_RISK;
+				return new ModerateRiskFactor();
 
-			return RiskFactor.LOW_RISK;
+			return new LowRiskFactor();
 		}
 
 		public double calculateInsurancePremium(double insuranceValue) {
-			RiskFactor riskFactor = calculateMotoristRisk();
-			switch (riskFactor) {
-			case LOW_RISK:
-				return insuranceValue * 0.02;
-			case MODERATE_RISK:
-				return insuranceValue * 0.04;
-			default:
-				return insuranceValue * 0.06;
-			}
+			return calculateMotoristRisk().calculateInsurance(insuranceValue);
 		}
-	}
-
-	enum RiskFactor {
-		LOW_RISK, MODERATE_RISK, HIGH_RISK
 	}
 
 	class Motorist {
