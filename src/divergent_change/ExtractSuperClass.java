@@ -4,13 +4,26 @@ import java.util.Enumeration;
 import java.util.Vector;
 
 public class ExtractSuperClass {
-	class Employee {
+	abstract class Party {
 		private String name;
+
+		public String getName() {
+			return name;
+		}
+
+		public Party(String name) {
+			this.name = name;
+		}
+
+		abstract int getAnnualCost();
+	}
+
+	class Employee extends Party {
 		private int annualCost;
 		private String id;
 
 		public Employee(String name, String id, int annualCost) {
-			this.name = name;
+			super(name);
 			this.id = id;
 			this.annualCost = annualCost;
 		}
@@ -23,20 +36,16 @@ public class ExtractSuperClass {
 			return id;
 		}
 
-		public String getName() {
-			return name;
-		}
 	}
 
-	class Department {
-		private String name;
+	class Department extends Party {
 		private Vector<Employee> staff = new Vector();
 
 		public Department(String name) {
-			this.name = name;
+			super(name);
 		}
 
-		public int getTotalAnnualCost() {
+		public int getAnnualCost() {
 			int result = 0;
 			for (Employee employee : staff)
 				result += employee.getAnnualCost();
@@ -54,10 +63,6 @@ public class ExtractSuperClass {
 		public void addStaff(Employee arg) {
 			staff.addElement(arg);
 		}
-
-		public String getName() {
-			return name;
-		}
 	}
 
 	void test() {
@@ -66,9 +71,13 @@ public class ExtractSuperClass {
 		Department departement = new Department("Binus University");
 		departement.addStaff(andi);
 		departement.addStaff(budi);
-		System.out.printf("Department %s: %d\n", departement.getName(), departement.getTotalAnnualCost());
-		System.out.printf("Employee %s: %d\n", andi.getName(), andi.getAnnualCost());
-		System.out.printf("Employee %s: %d\n", budi.getName(), budi.getAnnualCost());
+		print(departement, "Departement");
+		print(andi, "Employee");
+		print(budi, "Employee");
+	}
+
+	void print(Party party, String type) {
+		System.out.printf("%s %s: %d\n", type, party.getName(), party.getAnnualCost());
 	}
 
 	public static void main(String[] a) {
