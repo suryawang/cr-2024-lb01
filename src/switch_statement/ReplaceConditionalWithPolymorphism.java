@@ -39,16 +39,7 @@ class Employee {
 	// Replace this method with polymorphism
 
 	public int payAmount() {
-		switch (getTypeCode()) {
-		case EmployeeType.ENGINEER:
-			return monthlySalary;
-		case EmployeeType.SALESMAN:
-			return monthlySalary + commission;
-		case EmployeeType.MANAGER:
-			return monthlySalary + bonus;
-		default:
-			throw new RuntimeException("Incorrect Employee Code");
-		}
+		return type.payAmount(this);
 	}
 }
 
@@ -71,12 +62,18 @@ abstract class EmployeeType {
 			throw new IllegalArgumentException("Incorrect Employee Code");
 		}
 	}
+	abstract int payAmount(Employee employee);
 }
 
 class Engineer extends EmployeeType {
 	@Override
 	public int getTypeCode() {
 		return EmployeeType.ENGINEER;
+	}
+
+	@Override
+	int payAmount(Employee employee) {
+		return employee.monthlySalary;
 	}
 }
 
@@ -85,11 +82,21 @@ class Salesman extends EmployeeType {
 	public int getTypeCode() {
 		return EmployeeType.SALESMAN;
 	}
+
+	@Override
+	int payAmount(Employee employee) {
+		return employee.monthlySalary + employee.commission;
+	}
 }
 
 class Manager extends EmployeeType {
 	@Override
 	public int getTypeCode() {
 		return EmployeeType.MANAGER;
+	}
+
+	@Override
+	int payAmount(Employee employee) {
+		return employee.monthlySalary + employee.bonus;
 	}
 }
