@@ -27,13 +27,22 @@ public class ReplaceInheritanceWithDelegation {
 		}
 	}
 
-	class Car extends Engine {
+	class Car {
 		// ...
 		private String brand;
 		private String model;
+		private Engine engine = new Engine();
 
 		public String getName() {
-			return brand + " " + model + " (" + getCV() + "CV)";
+			return brand + " " + model + " (" + engine.getCV() + "CV)";
+		}
+
+		public void setCV(double cv) {
+			engine.setCV(cv);
+		}
+
+		public void setFuel(double fuel) {
+			engine.setFuel(fuel);
 		}
 
 		public String getModel() {
@@ -53,7 +62,7 @@ public class ReplaceInheritanceWithDelegation {
 		}
 
 		public String toString() {
-			return String.format("Car %s type %s: Engine: %s", brand, model, super.toString());
+			return String.format("Car %s type %s: Engine: %s", brand, model, engine.toString());
 		}
 	}
 
