@@ -20,22 +20,10 @@ public class MoveMethod {
 			type.setPremium(true);
 		}
 
-		public double overdraftCharge() {
-			if (type.isPremium()) {
-				double result = 10;
-				if (daysOverdrawn > 7) {
-					result += (daysOverdrawn - 7) * 0.85;
-				}
-				return result;
-			} else {
-				return daysOverdrawn * 1.75;
-			}
-		}
-
 		public double bankCharge() {
 			double result = 4.5;
 			if (daysOverdrawn > 0) {
-				result += overdraftCharge();
+				result += type.overdraftCharge(this);
 			}
 			return result;
 		}
@@ -54,6 +42,18 @@ public class MoveMethod {
 
 		public void setPremium(boolean premium) {
 			this.premium = premium;
+		}
+
+		public double overdraftCharge(Account account) {
+			if (isPremium()) {
+				double result = 10;
+				if (account.daysOverdrawn > 7) {
+					result += (account.daysOverdrawn - 7) * 0.85;
+				}
+				return result;
+			} else {
+				return account.daysOverdrawn * 1.75;
+			}
 		}
 	}
 
