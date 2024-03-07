@@ -6,7 +6,7 @@ public class IntroduceNullObject {
 		private Customer customer;
 
 		public Customer getCustomer() {
-			return customer;
+			return customer == null ? new NullCustomer() : customer;
 		}
 	}
 
@@ -28,10 +28,29 @@ public class IntroduceNullObject {
 		}
 	}
 
-	class PaymentHistory {
+	class NullCustomer extends Customer {
+		public String getName() {
+			return "N/A";
+		}
 
+		public BillingPlan getPlan() {
+			return BillingPlan.basic();
+		}
+
+		public PaymentHistory getHistory() {
+			return new NullPaymentHistory();
+		}
+	}
+
+	class PaymentHistory {
 		public int getWeeksDelinquentInLastYear() {
 			return 100;
+		}
+	}
+
+	class NullPaymentHistory extends PaymentHistory {
+		public int getWeeksDelinquentInLastYear() {
+			return 0;
 		}
 	}
 
@@ -41,6 +60,7 @@ public class IntroduceNullObject {
 		public int getPlan() {
 			return plan;
 		}
+
 		public static BillingPlan basic() {
 			var b = new BillingPlan();
 			b.plan = 10;
@@ -51,28 +71,13 @@ public class IntroduceNullObject {
 	void test() {
 		Company site = new Company();
 		Customer customer = site.getCustomer();
-		String customerName;
-		if (customer == null) {
-			customerName = "N/A";
-		} else {
-			customerName = customer.getName();
-		}
+		String customerName = customer.getName();
 
 		// …
-		BillingPlan plan;
-		if (customer == null) {
-			plan = BillingPlan.basic();
-		} else {
-			plan = customer.getPlan();
-		}
+		BillingPlan plan = customer.getPlan();
 
 		// …
-		int weeksDelinquent;
-		if (customer == null) {
-			weeksDelinquent = 0;
-		} else {
-			weeksDelinquent = customer.getHistory().getWeeksDelinquentInLastYear();
-		}
+		int weeksDelinquent = customer.getHistory().getWeeksDelinquentInLastYear();
 		System.out.println(weeksDelinquent);
 	}
 
