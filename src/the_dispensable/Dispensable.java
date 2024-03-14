@@ -13,8 +13,8 @@ public class Dispensable {
 			items.add(new SaleItem(n, rnd.nextInt(50), m.getPrice(n)));
 		}
 		for (SaleItem s : items) {
-			System.out.println(s.markdownView());
-			System.out.println(s.htmlView());
+			System.out.println(new SaleItemMarkDownView(s).view());
+			System.out.println(new SaleItemHtmlView(s).view());
 		}
 	}
 }
@@ -75,24 +75,71 @@ class SaleItem {
 		final int basePrice = quantity * itemPrice;
 		final double discount = Math.max(0, this.quantity - 500) * itemPrice * 0.05;
 		final double shippingCost = Math.min(quantity * itemPrice * 0.1, 100.0);
-		
+
 		return basePrice - discount + shippingCost;
 	}
+}
 
-	// refactor the following two method using form template method
-	public String markdownView() {
-		String out = "#" + this.getName() + "\r\n";
-		out += "> Quantity = " + this.getQuantity() + "\r\n";
-		out += "> Price = " + this.getItemPrice() + "\r\n";
-		out += "= " + this.price() + "\r\n";
-		return out;
+abstract class SaleItemView {
+	protected SaleItem item;
+
+	public SaleItemView(SaleItem item) {
+		this.item = item;
 	}
 
-	public String htmlView() {
-		String out = "<dl><dt>" + this.getName() + "</dt>";
-		out += "<dd> Quantity = " + this.getQuantity() + "</dd>";
-		out += "<dd> Price = " + this.getItemPrice() + "</dd>";
-		out += "<dd> Total =" + this.price() + "</dd></dl>";
-		return out;
+	abstract String name();
+
+	abstract String quantity();
+
+	abstract String price();
+
+	abstract String total();
+
+	public String view() {
+		return name() + quantity() + price() + total();
+	}
+}
+
+class SaleItemMarkDownView extends SaleItemView {
+	public SaleItemMarkDownView(SaleItem item) {
+		super(item);
+	}
+
+	String name() {
+		return "#" + item.getName() + "\r\n";
+	}
+
+	String quantity() {
+		return "> Quantity = " + item.getQuantity() + "\r\n";
+	}
+
+	String price() {
+		return "> Price = " + item.getItemPrice() + "\r\n";
+	}
+
+	String total() {
+		return "= " + item.price() + "\r\n";
+	}
+}
+
+class SaleItemHtmlView extends SaleItemView {
+	public SaleItemHtmlView(SaleItem item) {
+		super(item);
+	}
+
+	String name() {
+		return "<dl><dt>" + item.getName() + "</dt>";
+	}
+
+	String quantity() {
+		return "<dd> Quantity = " + item.getQuantity() + "</dd>";
+	}
+
+	String price() {
+		return "<dd> Price = " + item.getItemPrice() + "</dd>";
+	}
+
+	String total() {
+		return "<dd> Total =" + item.price() + "</dd></dl>";
 	}
 }
