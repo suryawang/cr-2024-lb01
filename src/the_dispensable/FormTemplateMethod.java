@@ -102,6 +102,28 @@ public class FormTemplateMethod {
 		}
 	}
 
+	class CsvView extends ArticleView {
+		public CsvView(Article article) {
+			super(article);
+		}
+
+		String title() {
+			return article.getTitle() + ",";
+		}
+
+		String intro() {
+			return article.getIntro() + ",";
+		}
+
+		String body() {
+			return article.getBody() + ",";
+		}
+
+		String footer() {
+			return article.getAuthor() + "," + article.getDate();
+		}
+	}
+
 	void test() {
 		Article ar = new Article("China commercial property woes trigger surge in distressed sales",
 				"More than a fifth of commercial deals involve real estate put into receivership",
@@ -109,6 +131,7 @@ public class FormTemplateMethod {
 				"ECHO WONG", "March 14, 2024 14:47 JST");
 		System.out.println(new MarkdownView(ar).view());
 		System.out.println(new HtmlView(ar).view());
+		System.out.println(new CsvView(ar).view());
 	}
 
 	public static void main(String[] a) {
