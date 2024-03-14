@@ -5,6 +5,11 @@ public class PullUpConstructorBody {
 		protected String name;
 		protected String id;
 
+		public Employee(String name, String id) {
+			this.name = name;
+			this.id = id;
+		}
+
 		public String toString() {
 			return id + ": " + name;
 		}
@@ -14,8 +19,7 @@ public class PullUpConstructorBody {
 		private int grade;
 
 		public Manager(String name, String id, int grade) {
-			this.name = name;
-			this.id = id;
+			super(name, id);
 			this.grade = grade;
 		}
 
