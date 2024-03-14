@@ -1,5 +1,7 @@
 package the_dispensable;
 
+import java.sql.Date;
+
 public class PullUpConstructorBody {
 	class Employee {
 		protected String name;
@@ -26,6 +28,15 @@ public class PullUpConstructorBody {
 		public String toString() {
 			return super.toString() + ", grade: " + grade;
 		}
+	}
+	
+	class Staff extends Employee {
+		private Date endContract;
+		public Staff(String name, String id, Date endContract) {
+			super(name, id);
+			this.endContract = endContract;
+		}
+		
 	}
 
 	void test() {
