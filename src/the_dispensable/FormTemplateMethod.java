@@ -36,21 +36,69 @@ public class FormTemplateMethod {
 		public String getDate() {
 			return date;
 		}
+	}
 
-		public String markdownView() {
-			String output = "# " + getTitle() + "\n\n";
-			output += "> " + getIntro() + "\n\n";
-			output += getBody() + "\n\n";
-			output += "_Written by " + getAuthor() + " on " + getDate() + "_";
-			return output;
+	abstract class ArticleView {
+		protected Article article;
+
+		public ArticleView(Article article) {
+			this.article = article;
 		}
 
-		public String htmlView() {
-			String output = "<h2>" + getTitle() + "</h2>" + "\n";
-			output += "<blockquote>" + getIntro() + "</blockquote>" + "\n";
-			output += "<p>" + getBody() + "</p>" + "\n";
-			output += "<em>Written by " + getAuthor() + " on " + getDate() + "</em>";
-			return output;
+		abstract String title();
+
+		abstract String intro();
+
+		abstract String body();
+
+		abstract String footer();
+
+		public String view() {
+			return title() + intro() + body() + footer();
+		}
+	}
+
+	class MarkdownView extends ArticleView {
+		public MarkdownView(Article article) {
+			super(article);
+		}
+
+		String title() {
+			return "# " + article.getTitle() + "\n\n";
+		}
+
+		String intro() {
+			return "> " + article.getIntro() + "\n\n";
+		}
+
+		String body() {
+			return article.getBody() + "\n\n";
+		}
+
+		String footer() {
+			return "_Written by " + article.getAuthor() + " on " + article.getDate() + "_";
+		}
+	}
+
+	class HtmlView extends ArticleView {
+		public HtmlView(Article article) {
+			super(article);
+		}
+
+		String title() {
+			return "<h2>" + article.getTitle() + "</h2>" + "\n";
+		}
+
+		String intro() {
+			return "<blockquote>" + article.getIntro() + "</blockquote>" + "\n";
+		}
+
+		String body() {
+			return "<p>" + article.getBody() + "</p>" + "\n";
+		}
+
+		String footer() {
+			return "<em>Written by " + article.getAuthor() + " on " + article.getDate() + "</em>";
 		}
 	}
 
@@ -59,8 +107,8 @@ public class FormTemplateMethod {
 				"More than a fifth of commercial deals involve real estate put into receivership",
 				"HONG KONG -- Distressed sales made up more than a fifth of Chinese commercial real estate deals in 2023, underscoring the severity of the property crisis in Asia's largest economy.",
 				"ECHO WONG", "March 14, 2024 14:47 JST");
-		System.out.println(ar.markdownView());
-		System.out.println(ar.htmlView());
+		System.out.println(new MarkdownView(ar).view());
+		System.out.println(new HtmlView(ar).view());
 	}
 
 	public static void main(String[] a) {
