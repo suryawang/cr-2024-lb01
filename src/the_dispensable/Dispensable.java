@@ -71,15 +71,10 @@ class SaleItem {
 		return this.itemPrice;
 	}
 
-	// refactor this method using inline method
-	private int FirstFiveHundredNoDiscount() {
-		return this.quantity - 500;
-	}
-
 	// refactor this method using extract variable
 	public double price() {
 		// Price consists of: base price - discount + shipping cost
-		return quantity * itemPrice - Math.max(0, FirstFiveHundredNoDiscount()) * itemPrice * 0.05
+		return quantity * itemPrice - Math.max(0, this.quantity - 500) * itemPrice * 0.05
 				+ Math.min(quantity * itemPrice * 0.1, 100.0);
 	}
 
