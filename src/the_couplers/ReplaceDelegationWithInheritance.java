@@ -17,24 +17,10 @@ public class ReplaceDelegationWithInheritance {
 		}
 	}
 
-	class Employee {
-		protected Person person;
-
-		public Employee() {
-			this.person = new Person();
-		}
-
-		public String getName() {
-			return person.getName();
-		}
-
-		public void setName(String name) {
-			person.setName(name);
-		}
-
+	class Employee extends Person {
 		@Override
 		public String toString() {
-			return "Emp: " + person.getLastName();
+			return "Emp: " + getLastName();
 		}
 	}
 }
