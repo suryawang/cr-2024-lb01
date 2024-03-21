@@ -10,10 +10,16 @@ public class Project extends JFrame implements ActionListener {
 
 		setSize(1500, 800);
 
-		/* Adding background image */
-		JLabel l1 = new JLabel(ImageGenerator.getIcon("images/main.jpg", 1420, 720));
-		add(l1);
+		add(new JLabel(ImageGenerator.getIcon("images/main.jpg", 1420, 720)));
 
+		setJMenuBar(setupMenu());
+
+		setFont(new Font("Senserif", Font.BOLD, 16));
+		setLayout(new FlowLayout());
+		setVisible(false);
+	}
+
+	private JMenuBar setupMenu() {
 		/* First Column */
 		JMenuBar mb = new JMenuBar();
 		JMenu master = new JMenu("Master");
@@ -21,10 +27,6 @@ public class Project extends JFrame implements ActionListener {
 		JMenuItem m2 = new JMenuItem("Customer Details");
 		JMenuItem m3 = new JMenuItem("Deposit Details");
 		master.setForeground(Color.BLUE);
-
-		setMenuItem(m1, "icon1.jpg", 'D', KeyEvent.VK_D);
-		setMenuItem(m2, "icon2.png", 'M', KeyEvent.VK_M);
-		setMenuItem(m3, "icon3.png", 'N', KeyEvent.VK_N);
 
 		// --------------------------------------------------------------------------------------------
 
@@ -35,10 +37,6 @@ public class Project extends JFrame implements ActionListener {
 		JMenuItem u3 = new JMenuItem("Last Bill");
 		user.setForeground(Color.RED);
 
-		setMenuItem(u1, "icon4.png", 'P', KeyEvent.VK_P);
-		setMenuItem(u2, "icon5.png", 'B', KeyEvent.VK_B);
-		setMenuItem(u3, "icon6.png", 'L', KeyEvent.VK_L);
-
 		// ---------------------------------------------------------------------------------------------
 
 		/* Third Column */
@@ -46,7 +44,6 @@ public class Project extends JFrame implements ActionListener {
 		JMenuItem r1 = new JMenuItem("Generate Bill");
 		report.setForeground(Color.BLUE);
 
-		setMenuItem(r1, "icon7.png", 'R', KeyEvent.VK_R);
 
 		// -----------------------------------------------------------------------------------------------
 
@@ -57,9 +54,6 @@ public class Project extends JFrame implements ActionListener {
 		JMenuItem ut3 = new JMenuItem("Web Browser");
 		utility.setForeground(Color.RED);
 
-		setMenuItem(ut1, "icon12.png", 'C', KeyEvent.VK_C);
-		setMenuItem(ut2, "icon9.png", 'X', KeyEvent.VK_X);
-		setMenuItem(ut3, "icon10.png", 'W', KeyEvent.VK_W);
 
 		// ---------------------------------------------------------------------------------------
 
@@ -68,6 +62,17 @@ public class Project extends JFrame implements ActionListener {
 		JMenuItem ex = new JMenuItem("Exit");
 		exit.setForeground(Color.BLUE);
 
+		setMenuItem(m1, "icon1.jpg", 'D', KeyEvent.VK_D);
+		setMenuItem(m2, "icon2.png", 'M', KeyEvent.VK_M);
+		setMenuItem(m3, "icon3.png", 'N', KeyEvent.VK_N);
+		setMenuItem(u1, "icon4.png", 'P', KeyEvent.VK_P);
+		setMenuItem(u2, "icon5.png", 'B', KeyEvent.VK_B);
+		setMenuItem(u3, "icon6.png", 'L', KeyEvent.VK_L);
+
+		setMenuItem(r1, "icon7.png", 'R', KeyEvent.VK_R);
+		setMenuItem(ut1, "icon12.png", 'C', KeyEvent.VK_C);
+		setMenuItem(ut2, "icon9.png", 'X', KeyEvent.VK_X);
+		setMenuItem(ut3, "icon10.png", 'W', KeyEvent.VK_W);
 		setMenuItem(ex, "icon11.png", 'Z', KeyEvent.VK_Z);
 
 		// ---------------------------------------------------------------------------------------------
@@ -93,12 +98,7 @@ public class Project extends JFrame implements ActionListener {
 		mb.add(report);
 		mb.add(utility);
 		mb.add(exit);
-
-		setJMenuBar(mb);
-
-		setFont(new Font("Senserif", Font.BOLD, 16));
-		setLayout(new FlowLayout());
-		setVisible(false);
+		return mb;
 	}
 
 	private void setMenuItem(JMenuItem item, String file, char mnemonic, int key) {
