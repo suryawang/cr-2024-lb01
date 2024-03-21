@@ -13,10 +13,6 @@ public class login extends JFrame implements ActionListener {
 	JButton b1, b2;
 	JPanel p1, p2, p3, p4;
 
-	ImageIcon getIcon(String file, int width, int height) {
-		var image = new ImageIcon(ClassLoader.getSystemResource(file));
-		return new ImageIcon(image.getImage().getScaledInstance(width, height, Image.SCALE_DEFAULT));
-	}
 
 	login() {
 		super("Login Page");
@@ -25,13 +21,13 @@ public class login extends JFrame implements ActionListener {
 		tf1 = new JTextField(15);
 		pf2 = new JPasswordField(15);
 
-		b1 = new JButton("Login", getIcon("images/login.jpg", 50, 50));
-		b2 = new JButton("Cancel", getIcon("images/cancel.png", 50, 50));
+		b1 = new JButton("Login", ImageGenerator.getIcon("images/login.jpg", 50, 50));
+		b2 = new JButton("Cancel", ImageGenerator.getIcon("images/cancel.png", 50, 50));
 
 		b1.addActionListener(this);
 		b2.addActionListener(this);
 
-		l3 = new JLabel(getIcon("images/pop.jpg", 340, 370));
+		l3 = new JLabel(ImageGenerator.getIcon("images/pop.jpg", 340, 370));
 
 		setLayout(new BorderLayout());
 

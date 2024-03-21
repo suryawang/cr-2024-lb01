@@ -29,11 +29,7 @@ public class splash
         {
             super("Electricity Billing System");
             setLayout(new FlowLayout());
-            ImageIcon c1=new ImageIcon(ClassLoader.getSystemResource("images/splash.jpg"));
-            Image i1=c1.getImage().getScaledInstance(720,550,Image.SCALE_DEFAULT);
-            ImageIcon i2=new ImageIcon(i1);
-
-            JLabel l1=new JLabel(i2);
+            JLabel l1=new JLabel(ImageGenerator.getIcon("images/splash.jpg",720,550));
             add(l1);
             t1=new Thread(this);
             t1.start();
