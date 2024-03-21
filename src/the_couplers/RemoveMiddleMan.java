@@ -4,12 +4,12 @@ public class RemoveMiddleMan {
 	class Person {
 		private Department department;
 
-		public void setDepartment(Department arg) {
-			department = arg;
+		public Department getDepartment() {
+			return department;
 		}
 
-		public Person getManager() {
-			return department.getManager();
+		public void setDepartment(Department arg) {
+			department = arg;
 		}
 	}
 
@@ -28,6 +28,6 @@ public class RemoveMiddleMan {
 
 	void test() {
 		Person john = new Person();
-		var manager = john.getManager();
+		var manager = john.getDepartment().getManager();
 	}
 }
