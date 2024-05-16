@@ -10,8 +10,13 @@ public class BookingHotel {
 	private Date BookedDate;
 	private int RatePerNight;
 	private String BookingId;
+	private static int num;
 
-	public BookingHotel() {
+	public BookingHotel(String bookedDate) {
+		num++;
+		setBookedDate(bookedDate);
+		var f = new SimpleDateFormat("yyyyMMdd").format(BookedDate);
+		BookingId = "HTLBKG" + f + String.format("%05d", num);
 	}
 
 	public String getBookingId() {
@@ -38,11 +43,11 @@ public class BookingHotel {
 		return BookedDate;
 	}
 
-	public void setBookedDate(Date bookedDate) {
-		BookedDate = bookedDate;
-	}
+//	public void setBookedDate(Date bookedDate) {
+//		BookedDate = bookedDate;
+//	}
 
-	public void setBookedDate(String bookedDate) {
+	private void setBookedDate(String bookedDate) {
 		try {
 			DateFormat formatTanggal = new SimpleDateFormat("dd-MM-yyyy");
 			this.BookedDate = formatTanggal.parse(bookedDate);
