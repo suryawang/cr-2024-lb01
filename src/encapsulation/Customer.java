@@ -2,7 +2,7 @@ package encapsulation;
 
 public class Customer {
 	private String CustomerId;
-	public String CustomerName;
+	private String CustomerName;
 	private String ContactNo;
 	private String Address;
 

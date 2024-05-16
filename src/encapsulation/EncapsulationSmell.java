@@ -1,12 +1,11 @@
 package encapsulation;
 
-import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Date;
 
 public class EncapsulationSmell {
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws ParseException {
 		Hotel hotelSantika = new Hotel();
 		hotelSantika.setHotelName("Hotel Santika Jakarta Barat");
 		hotelSantika.setStar(5);
@@ -19,16 +18,18 @@ public class EncapsulationSmell {
 		BookingHotel transaksiPemesanan = new BookingHotel();
 		transaksiPemesanan.setReservedBy(yangPesan);
 		transaksiPemesanan.setBookedHotel(hotelSantika);
-		transaksiPemesanan.BookingId = "HTLBKG2016052100001";
+		//transaksiPemesanan.BookingId = "HTLBKG2016052100001";
 		transaksiPemesanan.setRatePerNight(550000);
-		transaksiPemesanan.setBookedDate(new Date("2016-05-21"));
+		transaksiPemesanan.setBookedDate(new SimpleDateFormat("yyyy-MM-dd").parse("2016-05-21")); //new Date("2016-05-21"));
 		transaksiPemesanan.setBookedDate("12-05-2016");
-
-		transaksiPemesanan.ReservedBy.CustomerName = "Budiono";
+		var b = new Customer();
+		b.setCustomerName("Budiono");
+		transaksiPemesanan.setReservedBy(b);
+		//transaksiPemesanan.ReservedBy.CustomerName = "Budiono";
 		hotelSantika.setDescription("Description of " + hotelSantika.getHotelName() + " : Test");
 		System.out.println(hotelSantika.getDescription());
-		hotelSantika.HotelId = "HOTEL000001";
-		System.out.println(hotelSantika.HotelId);
+		//hotelSantika.HotelId = "HOTEL000001";
+		System.out.println(hotelSantika.getId());
 		System.out.println(transaksiPemesanan.getBookingId());
 		System.out.println(transaksiPemesanan.getBookedDate());
 	}

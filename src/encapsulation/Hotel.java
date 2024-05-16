@@ -3,7 +3,7 @@ package encapsulation;
 import java.util.List;
 
 public class Hotel extends HotelStar {
-	public String HotelId;
+	private String HotelId;
 	private String HotelName;
 	private String Address;
 	private List<String> RoomType;
@@ -33,6 +33,10 @@ public class Hotel extends HotelStar {
 
 	public String getHotelName() {
 		return HotelName;
+	}
+
+	public String getId() {
+		return HotelId;
 	}
 
 }
